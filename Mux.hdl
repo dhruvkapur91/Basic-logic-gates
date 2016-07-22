@@ -15,4 +15,19 @@ CHIP Mux {
 
     PARTS:
     // Put your code here:
+    // mux equation: a*Not(s) + b*s
+    // Nand equation = Not(A) + Not(B) = a*Not(s) + b*s
+    // Not(A) = a*Not(S) => A = Not(a*Not(S)) => A = Not(a) + S
+       // Nand equation = Not(X) + Not(Y) = Not(A) + S
+       // => X = A, Y = Not(S)
+    // Not(B) = b*s => B = Not(b*s) => Not(b) + Not(s)
+       // Nand equation = Not(X) + Not(Y) = Not(b) + Not(s)
+       // X = b, Y = s
+
+    Not(in = a, out = notA);
+    Not(in = b, out = notB);
+    Not(in = sel, out = notS);
+    Nand(a = a, b = notS, out = notAOrS);
+    Nand(a = b, b = sel, out = notBOrNotS);
+    Nand(a = notAOrS, b = notBOrNotS, out = out);
 }
