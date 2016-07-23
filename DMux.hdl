@@ -15,4 +15,13 @@ CHIP DMux {
 
     PARTS:
     // Put your code here:
+    // Dmux equation
+       // o1 = not(s)*in
+       // o2 = s*in
+    Nand(a = sel, b = in, out = notSOrNotIn);
+    Not(in = notSOrNotIn, out = b);
+
+    Not(in = sel, out = notS);
+    Nand(a = notS, b = in, out = notNotSOrNotIn);
+    Not(in = notNotSOrNotIn, out = a);
 }
